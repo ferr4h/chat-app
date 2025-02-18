@@ -1,198 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat App</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <style>
-    .users-box {
-      height: 250px;
-      border: 2px solid #626262;
-      padding: 10px;
-      border-radius: 8px;
-      box-sizing: border-box;
-      background-color: #faf7f7;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-    .chat-box {
-      height: 250px;
-      border: 2px solid #626262;
-      padding: 10px;
-      border-radius: 8px;
-      box-sizing: border-box;
-      background-color: #faf7f7;
-      margin-left: 20px;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-    .user-box{
-      margin-left: -10px;
-      margin-top: 15px;
-      box-sizing: border-box;
-    }
-    .message-box{
-      width: 70%;
-      margin-left: 20px;
-      margin-top: 15px;
-      box-sizing: border-box;
-    }
-    .btn{
-      background-color: #626262;
-      border: 1px solid #000;
-    }
-    .highlight {
-      border: 1px solid #db1a1a;
-      outline: none;
-    }
-    .highlight:focus{
-      border: 1px solid #db1a1a;
-      outline: none;
-      box-shadow: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        .users-box {
+            height: 250px;
+            border: 2px solid #626262;
+            padding: 10px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #faf7f7;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .chat-box {
+            height: 250px;
+            border: 2px solid #626262;
+            padding: 10px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #faf7f7;
+            margin-left: 20px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .user-box{
+            margin-left: -10px;
+            margin-top: 15px;
+            box-sizing: border-box;
+        }
+        .message-box{
+            width: 70%;
+            margin-left: 20px;
+            margin-top: 15px;
+            box-sizing: border-box;
+        }
+        .btn{
+            background-color: #626262;
+            border: 1px solid #000;
+        }
+        .highlight {
+            border: 1px solid #db1a1a;
+            outline: none;
+        }
+        .highlight:focus{
+            border: 1px solid #db1a1a;
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1 style="font-weight: bold">Chat App</h1>
-  <hr>
-  <div class="row">
-    <div class="col-sm-12 col-md-2 col-lg-2 users-box">
-      <h6 id="online_users">Users online</h6>
-      <ul id="users_online">
-      </ul>
-    </div>
-    <div class="col-sm-12 col-md-7 col-lg-7 chat-box" id="chat_box"></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-2 col-lg-2 user-box">
-      <input type="text" name="username" id="username" class="form-control" autocomplete="off" placeholder="Username">
-    </div>
-    <div class="col-sm-12 col-md-7 col-lg-7 message-box">
-      <div class="row">
-        <div class="col-md-7">
-          <input type="text" name="message" id="message" class="form-control" autocomplete="off" placeholder="Message">
+    <h1 style="font-weight: bold">Chat App</h1>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 users-box">
+            <h6 id="online_users">Users online</h6>
+            <ul id="users_online">
+            </ul>
         </div>
-        <div class="col-md-5">
-          <button type="button" class="btn btn-success" id="send_button">Send</button>
-        </div>
-      </div>
+        <div class="col-sm-12 col-md-7 col-lg-7 chat-box" id="chat_box"></div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2 user-box">
+            <input type="text" name="username" id="username" class="form-control" autocomplete="off" placeholder="Username">
+            <div id="error" style="color: #db1a1a"></div>
+        </div>
+        <div class="col-sm-12 col-md-7 col-lg-7 message-box">
+            <div class="row">
+                <div class="col-md-7">
+                    <input type="text" name="message" id="message" class="form-control" autocomplete="off" placeholder="Message">
+                </div>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-success" id="send_button">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 <script>
-  //TODO: add alerts
-  //TODO: handle username already exists error
-  let socket = null;
-  let usernameField = document.getElementById("username");
-  let messageField = document.getElementById("message");
-  let sendButton = document.getElementById("send_button");
+    let socket = null;
+    const usernameField = document.getElementById("username");
+    const messageField = document.getElementById("message");
+    const sendButton = document.getElementById("send_button");
 
-  document.addEventListener("DOMContentLoaded", function (){
-    socket = new WebSocket("ws://localhost:8080/ws");
-    socket.onmessage = function(event) {
+    document.addEventListener("DOMContentLoaded", function (){
+        socket = new WebSocket("ws://localhost:8080/ws");
+        socket.onmessage = function(event) {
 
-      let data = JSON.parse(event.data)
+            let data = JSON.parse(event.data)
 
-      switch (data.action) {
-        case "update_users":
-          let ul = document.getElementById("users_online");
-          while (ul.firstChild) ul.removeChild(ul.firstChild);
-          const usersArray = data.payload.split(",").map(user => user.trim()).filter(user => user !== "");
-          if (usersArray.length > 0) {
-            usersArray.forEach(function (item) {
-              let li = document.createElement("li");
-              li.appendChild(document.createTextNode(item));
-              ul.appendChild(li);
-            })
-          }
-          break;
-        case "message":
-          let chat = document.getElementById("chat_box");
-          chat.innerHTML = chat.innerHTML + data.payload + "<br>";
-          chat.scrollTop = chat.scrollHeight;
-          break;
-      }
-    };
-  })
+            switch (data.action) {
+                case "update_users":
+                    const ul = document.getElementById("users_online");
+                    while (ul.firstChild) ul.removeChild(ul.firstChild);
+                    const usersArray = data.payload.split(",").map(user => user.trim()).filter(user => user !== "");
+                    if (usersArray.length > 0) {
+                        usersArray.forEach(function (item) {
+                            let li = document.createElement("li");
+                            li.appendChild(document.createTextNode(item));
+                            ul.appendChild(li);
+                        })
+                    }
+                    break;
+                case "message":
+                    const chat = document.getElementById("chat_box");
+                    chat.innerHTML = chat.innerHTML + data.payload + "<br>";
+                    chat.scrollTop = chat.scrollHeight;
+                    break;
+                case "username_error":
+                    showAlert("Username already taken");
+                    highlightFiled(usernameField);
+            }
+        };
+    })
 
-  usernameField.addEventListener("change", function () {
-    if (!(checkUsername(usernameField.value))){
-      highlightFiled(usernameField);
-      return false;
+    usernameField.addEventListener("change", function () {
+        if (!(checkUsername(usernameField.value))){
+            showAlert("Invalid username")
+            highlightFiled(usernameField);
+            return false;
+        }
+
+        let data = {};
+        data["action"] = "username";
+        data["payload"] = this.value;
+        socket.send(JSON.stringify(data));
+    })
+
+    messageField.addEventListener("keydown", function (event) {
+        if (event.code === "Enter") {
+            event.preventDefault();
+            event.stopPropagation();
+            sendMessage();
+        }
+    })
+
+    sendButton.addEventListener("click", function() {
+        sendMessage();
+    })
+
+    function sendMessage() {
+        if (!validate()) {
+            return;
+        }
+
+        let data = {};
+        data["action"] = "message";
+        data["payload"] = messageField.value;
+        socket.send(JSON.stringify(data));
+        messageField.value = "";
     }
 
-    let data = {};
-    data["action"] = "username";
-    data["payload"] = this.value;
-    socket.send(JSON.stringify(data));
-  })
-
-  messageField.addEventListener("keydown", function (event) {
-    if (event.code === "Enter") {
-      event.preventDefault();
-      event.stopPropagation();
-      sendMessage();
-    }
-  })
-
-  sendButton.addEventListener("click", function() {
-    sendMessage();
-  })
-
-  function sendMessage() {
-    if (!validate()) {
-      return;
+    function highlightFiled(element) {
+        element.classList.add("highlight");
+        element.value = "";
+        setTimeout(() => {
+            element.classList.remove("highlight");
+        }, 3000);
     }
 
-    let data = {};
-    data["action"] = "message";
-    data["payload"] = messageField.value;
-    socket.send(JSON.stringify(data));
-    messageField.value = "";
-  }
+    function validate() {
+        if (!socket) {
+            return false;
+        }
 
-  function highlightFiled(element) {
-    element.classList.add("highlight");
-    element.value = "";
-    setTimeout(() => {
-      element.classList.remove("highlight");
-    }, 3000);
-  }
+        if (messageField.value === "") {
+            highlightFiled(messageField);
+            return false;
+        }
 
-  function validate() {
-    if (!socket) {
-      return false;
+        else if (usernameField.value === ""){
+            highlightFiled(usernameField);
+            return false;
+        }
+
+        return true;
     }
 
-    if (messageField.value === "") {
-      highlightFiled(messageField);
-      return false;
+    function checkUsername(username){
+        if (username.length < 3 || username.length > 20) {
+            return false;
+        }
+
+        const validUsernameRegex = /^[a-zA-Z0-9_]+$/;
+        if (!validUsernameRegex.test(username)) {
+            return false;
+        }
+
+        return true;
     }
 
-    else if (usernameField.value === "" || (!checkUsername(usernameField.value))){
-      highlightFiled(usernameField);
-      return false;
+    function showAlert(message){
+        const errorElement = document.getElementById('error');
+        errorElement.innerText = message;
+        usernameField.addEventListener("focus", function() {
+            errorElement.innerText = '';
+        });
     }
-
-    return true;
-  }
-
-  function checkUsername(username){
-    if (username.length < 3 || username.length > 20) {
-      return false;
-    }
-
-    const validUsernameRegex = /^[a-zA-Z0-9_]+$/;
-    if (!validUsernameRegex.test(username)) {
-      return false;
-    }
-
-    return true;
-  }
 
 </script>
 </html>
